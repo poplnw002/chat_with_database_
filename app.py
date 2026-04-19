@@ -75,7 +75,7 @@ def generate_summary_answer(user_question):
         table_name=data_table,
         data_dict=data_dict_text
     )
-    sql_json_text = call_gemini(script_prompt_input, is_json=True)
+    sql_json_text = generate_gemini_answer(script_prompt_input, is_json=True)
     try:
         sql_script = json.loads(sql_json_text)['script']
     except:
@@ -89,7 +89,7 @@ def generate_summary_answer(user_question):
         question=user_question,
         raw_data=df_result.to_string()
     )
-    return call_gemini(answer_prompt_input, is_json=False)
+    return generate_gemini_answer(answer_prompt_input, is_json=False)
 # USER INTERFACE
 # ตรวจสอบและสร้าง Chat History ใน Session State
 if "messages" not in st.session_state:
