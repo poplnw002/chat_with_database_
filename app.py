@@ -11,23 +11,23 @@ gmn_client = genai.Client(api_key=gemini_api_key)
 db_name = 'test_database.db'
 data_table = 'transactions'
 data_dict_text = """
-- trx_date: วันที7ทําธุรกรรม
+- trx_date: วันที่ทําธุรกรรม
 - trx_no: หมายเลขธุรกรรม
 - member_code: รหัสสมาชิกของลูกค้า
 - branch_code: รหัสสาขา
-- branch_region: ภูมิภาคที7สาขาตั Dงอยู่
-- branch_province: จังหวัดที7สาขาตั Dงอยู่
+- branch_region: ภูมิภาคที่สาขาตั้งอยู่
+- branch_province: จังหวัดที่สาขาตั้งอยู่
 - product_code: รหัสสินค้า
 - product_category: หมวดหมู่หลักของสินค้า
 - product_group: กลุ่มของสินค้า
 - product_type: ประเภทของสินค้า
-- order_qty: จํานวนชิ Dน/หน่วย ที7ลูกค้าสั7งซื Dอ
+- order_qty: จํานวนชิ้น/หน่วย ที่ลูกค้าสั่งซื้อ
 - unit_price: ราคาขายของสินค้าต่อ K หน่วย
 - cost: ต้นทุนของสินค้าต่อ K หน่วย
-- item_discount: ส่วนลดเฉพาะรายการสินค้านั Dนๆ
+- item_discount: ส่วนลดเฉพาะรายการสินค้านั้นๆ
 - customer_discount: ส่วนลดจากสิทธิของลูกค้า
-- net_amount: ยอดขายสุทธิของรายการนั Dน
-- cost_amount: ต้นทุนรวมของรายการนั Dน
+- net_amount: ยอดขายสุทธิของรายการนั้น
+- cost_amount: ต้นทุนรวมของรายการนั้น
 """
 # HELPER FUNCTIONS
 def query_to_dataframe(sql_query, database_name):
@@ -79,7 +79,7 @@ def generate_summary_answer(user_question):
     try:
         sql_script = json.loads(sql_json_text)['script']
     except:
-        return "ขออภัย ไม่สามารถสร้างคําสั9ง SQL ได้"
+        return "ขออภัย ไม่สามารถสร้างคําสั่ง SQL ได้"
 # 2. Query ข้อมูล
     df_result = query_to_dataframe(sql_script, db_name)
     if isinstance(df_result, str):
@@ -100,7 +100,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 # รับ Input
-if prompt := st.chat_input("พิมพ์คําถามที0นี0..."):
+if prompt := st.chat_input("พิมพ์คําถามที่นี่..."):
     # เก็บและแสดงข้อความ User
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
